@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Виїзна мийка авто у Львові — CCar | Мийка з виїздом за 60 хв</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta name="description" content="Виїзна мийка авто у Львові: приїдемо додому, в офіс чи на паркінг ТЦ за 60 хв. Своя вода й електрика, екозасоби, фіксовані ціни від 450 грн, оплата після роботи.">
 <meta name="keywords" content="виїзна мийка авто Львів, мийка авто з виїздом, хімчистка салону на виїзді, мобільна мийка Львів">
 <link rel="canonical" href="https://ccar.lviv.ua/">
@@ -225,8 +226,7 @@ svg.lucide{width:1.25em;height:1.25em;stroke-width:2;flex:none;vertical-align:mi
 .header-phone{display:none;align-items:center;gap:8px;font-weight:800;text-decoration:none;color:var(--text);min-height:44px;padding:0 8px;white-space:nowrap}
 .header-phone small{display:block;font-weight:600;font-size:12px;color:var(--success)}
 .header-cta{display:none}
-.lang-btn{font-weight:800;font-size:13px;width:auto;padding-inline:12px;display:inline-flex;align-items:center;gap:6px}
-.lang-btn .lucide{width:18px;height:18px;color:var(--accent-text)}
+.lang-btn{font-weight:800;font-size:13px}
 @media (min-width:768px){.header-cta{display:inline-flex}}
 @media (min-width:1180px){
   .nav{display:block}
@@ -734,7 +734,7 @@ details.more .opt-list{margin-top:12px}
     </nav>
     <div class="header-actions">
       <a class="header-phone js-tel" href="tel:+380671234567" data-track="click_call" data-track-src="header"><span><span class="js-phone-text">+380 67 123 45 67</span><small>● Працюємо зараз</small></span></a>
-      <button class="icon-btn lang-btn" type="button" id="langBtn" aria-label="Switch to English"><i data-lucide="globe"></i><span class="lang-code">EN</span></button>
+      <button class="icon-btn lang-btn" type="button" id="langBtn" aria-label="Switch to English">EN</button>
       <button class="icon-btn" type="button" id="themeBtn" aria-label="Увімкнути темну тему"><i data-lucide="moon"></i></button>
       <a class="icon-btn phone-icon js-tel" href="tel:+380671234567" aria-label="Подзвонити: +380 67 123 45 67" data-track="click_call" data-track-src="header_mobile"><i data-lucide="phone"></i></a>
       <button class="btn btn-primary btn-sm header-cta" type="button" data-book data-track-src="header" data-i18n="cta.book">Записатися</button>
@@ -1474,9 +1474,8 @@ function applyLang(lang) {
     el.innerHTML = lang === "uk" ? ukText.get(el) : (I18N[lang]?.[key] ?? ukText.get(el));
   });
   const b = $("#langBtn");
-  b.querySelector(".lang-code").textContent = lang === "uk" ? "EN" : "UA";
+  b.textContent = lang === "uk" ? "EN" : "UA";
   b.setAttribute("aria-label", lang === "uk" ? "Switch to English" : "Перейти на українську");
-  store.set("ccar.lang", lang);
 }
 $("#langBtn").addEventListener("click", () => applyLang(root.lang === "uk" ? "en" : "uk"));
 $("#year").textContent = new Date().getFullYear();
@@ -2070,7 +2069,8 @@ $("#cookieSettings").addEventListener("click", () => { $("#cookie").hidden = fal
    СТАРТ
    ========================================================= */
 applyTheme(store.get("ccar.theme"));
-const savedLang = store.get("ccar.lang"); if (savedLang && savedLang !== "uk") applyLang(savedLang);
+// Сайт завжди відкривається українською; EN діє лише до перезавантаження
+store.del("ccar.lang");
 $$(".js-phone-text").forEach(el => el.textContent = CONFIG.phoneDisplay);
 if (window.lucide) refreshIcons(); else addEventListener("load", refreshIcons);
 })();
