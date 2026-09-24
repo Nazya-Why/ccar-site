@@ -73,6 +73,31 @@ a{color:var(--accent-text)}
 .empty{padding:40px 16px;text-align:center}
 .setup{padding:24px;max-width:640px;margin:10vh auto 0;display:grid;gap:10px}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+:root{color-scheme:light dark}
+
+/* Випадаючі меню (замість системних <select>) */
+.dd{position:relative;display:inline-block}
+.dd-btn{display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:0 10px 0 12px;border-radius:10px;border:1px solid var(--border);background:var(--surface);cursor:pointer;font-weight:700;font-size:14px;white-space:nowrap;transition:border-color .15s,background .15s}
+.dd-btn:hover{background:var(--surface-2)}
+.dd-btn:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.dd-btn[aria-expanded="true"]{border-color:var(--accent);background:var(--surface-2)}
+.dd-btn .chev{width:16px;height:16px;color:var(--muted);transition:transform .2s}
+.dd-btn[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.dd-btn:disabled{opacity:.6;cursor:progress}
+.dot{width:9px;height:9px;border-radius:50%;flex:none;background:var(--muted)}
+.dot.new{background:var(--warn)}.dot.confirmed{background:var(--accent)}.dot.done{background:var(--ok)}.dot.cancelled{background:var(--err)}
+.dot.open{background:linear-gradient(90deg,var(--warn) 50%,var(--accent) 50%)}
+.dd-menu{position:absolute;right:0;top:calc(100% + 6px);z-index:20;min-width:100%;margin:0;padding:6px;list-style:none;background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:0 18px 40px -12px rgba(0,0,0,.45);transform-origin:top right;animation:ddIn .14s ease-out}
+.dd-menu.up{top:auto;bottom:calc(100% + 6px);transform-origin:bottom right}
+.dd.left .dd-menu{right:auto;left:0;transform-origin:top left}
+@keyframes ddIn{from{opacity:0;transform:translateY(-4px) scale(.97)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.dd-menu{animation:none}.dd-btn .chev{transition:none}}
+.dd-opt{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:9px;cursor:pointer;font-weight:700;font-size:14px;white-space:nowrap;outline:none}
+.dd-opt:hover,.dd-opt:focus{background:var(--surface-2)}
+.dd-opt:focus-visible{box-shadow:inset 0 0 0 2px var(--accent)}
+.dd-opt .check{width:16px;height:16px;margin-left:auto;color:var(--accent-text);visibility:hidden}
+.dd-opt[aria-selected="true"]{color:var(--accent-text)}
+.dd-opt[aria-selected="true"] .check{visibility:visible}
 </style>
 </head>
 <body>
@@ -90,6 +115,61 @@ const STATUSES = { new: "Нова", confirmed: "Підтверджена", done:
 const PLACES = { yard: "Двір / вулиця", parking: "Підземний паркінг", office: "Біля офісу", mall: "Парковка ТЦ" };
 const CONTACTS = { call: "Дзвінок", telegram: "Telegram", viber: "Viber", sms: "SMS" };
 const CLASSES = { sedan: "Седан / хетчбек", crossover: "Кросовер", suv: "Позашляховик", van: "Мінівен / бус" };
+const FILTER_STATUSES = { open: "Активні", all: "Усі статуси", ...STATUSES };
+
+/* Випадаюче меню: dropdown() дає розмітку, ddHandlers[key](value, button) викликається при виборі */
+const ddHandlers = {};
+const CHEV = `<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>`;
+const CHECK = `<svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>`;
+function dropdown(key, value, options, label, align = "") {
+  const k = esc(key);
+  return `<div class="dd ${align}" data-dd="${k}">
+    <button type="button" class="dd-btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="dd-${k}" aria-label="${esc(label)}: ${esc(options[value])}">
+      <span class="dot ${esc(value)}"></span><span>${esc(options[value])}</span>${CHEV}</button>
+    <ul class="dd-menu" id="dd-${k}" role="listbox" aria-label="${esc(label)}" hidden>
+      ${Object.entries(options).map(([v, t]) => `<li class="dd-opt" role="option" tabindex="-1" data-value="${esc(v)}" aria-selected="${v === value}"><span class="dot ${esc(v)}"></span>${esc(t)}${CHECK}</li>`).join("")}
+    </ul></div>`;
+}
+function ddClose(dd, focusBtn) {
+  if (!dd) return;
+  dd.querySelector(".dd-menu").hidden = true;
+  const btn = dd.querySelector(".dd-btn"); btn.setAttribute("aria-expanded", "false");
+  if (focusBtn) btn.focus();
+}
+function ddOpen(dd) {
+  document.querySelectorAll('.dd-btn[aria-expanded="true"]').forEach(b => ddClose(b.closest(".dd")));
+  const menu = dd.querySelector(".dd-menu"), btn = dd.querySelector(".dd-btn");
+  menu.hidden = false; btn.setAttribute("aria-expanded", "true");
+  const r = btn.getBoundingClientRect();
+  menu.classList.toggle("up", innerHeight - r.bottom < menu.offsetHeight + 16 && r.top > menu.offsetHeight + 16);
+  (menu.querySelector('[aria-selected="true"]') || menu.querySelector(".dd-opt")).focus();
+}
+function ddPick(opt) {
+  const dd = opt.closest(".dd"), btn = dd.querySelector(".dd-btn");
+  ddClose(dd, true);
+  if (opt.getAttribute("aria-selected") === "true") return;
+  ddHandlers[dd.dataset.dd]?.(opt.dataset.value, btn);
+}
+document.addEventListener("click", e => {
+  const btn = e.target.closest(".dd-btn"), opt = e.target.closest(".dd-opt");
+  if (opt) return ddPick(opt);
+  if (btn) { const dd = btn.closest(".dd"); return btn.getAttribute("aria-expanded") === "true" ? ddClose(dd) : ddOpen(dd); }
+  document.querySelectorAll('.dd-btn[aria-expanded="true"]').forEach(b => ddClose(b.closest(".dd")));
+});
+document.addEventListener("keydown", e => {
+  const btn = e.target.closest?.(".dd-btn"), opt = e.target.closest?.(".dd-opt");
+  if (btn && ["ArrowDown", "ArrowUp"].includes(e.key)) { e.preventDefault(); ddOpen(btn.closest(".dd")); return; }
+  if (!opt) return;
+  const opts = [...opt.parentElement.children], i = opts.indexOf(opt);
+  if (e.key === "ArrowDown") { e.preventDefault(); opts[(i + 1) % opts.length].focus(); }
+  else if (e.key === "ArrowUp") { e.preventDefault(); opts[(i - 1 + opts.length) % opts.length].focus(); }
+  else if (e.key === "Home") { e.preventDefault(); opts[0].focus(); }
+  else if (e.key === "End") { e.preventDefault(); opts[opts.length - 1].focus(); }
+  else if (e.key === "Enter" || e.key === " ") { e.preventDefault(); ddPick(opt); }
+  else if (e.key === "Escape") { e.preventDefault(); ddClose(opt.closest(".dd"), true); }
+  else if (e.key === "Tab") ddClose(opt.closest(".dd"));
+});
+
 const kyiv = (iso, opts) => new Date(iso).toLocaleString("uk-UA", { timeZone: "Europe/Kyiv", ...opts });
 
 const cfg = window.CCAR_SUPABASE || {};
@@ -142,18 +222,19 @@ function renderShell() {
     <div class="stats" id="stats"></div>
     <div class="filters" role="group" aria-label="Фільтри">
       ${[["all", "Усі"], ["booking", "Записи"], ["callback", "Передзвонити"], ["b2b", "B2B"]].map(([v, t]) => `<button class="chip" type="button" data-type="${v}">${t}</button>`).join("")}
-      <select id="statusSel" aria-label="Статус" style="width:auto;min-height:36px">
-        <option value="open">Активні (нові й підтверджені)</option><option value="all">Усі статуси</option>
-        ${Object.entries(STATUSES).map(([v, t]) => `<option value="${v}">${t}</option>`).join("")}
-      </select>
+      ${dropdown("filter", state.status, FILTER_STATUSES, "Фільтр за статусом", "left")}
       <input id="search" type="search" placeholder="Пошук: ім'я, телефон, адреса, CC-…" aria-label="Пошук">
     </div>
     <div class="list" id="list"></div>`;
   $("#reload").onclick = load;
   $("#logout").onclick = async () => { clearInterval(start.timer); await sb.auth.signOut(); renderLogin(); };
   app.querySelectorAll("[data-type]").forEach(b => b.onclick = () => { state.type = b.dataset.type; renderList(); });
-  $("#statusSel").value = state.status;
-  $("#statusSel").onchange = e => { state.status = e.target.value; renderList(); };
+  ddHandlers.filter = v => {
+    state.status = v;
+    const dd = $('[data-dd="filter"]'); dd.outerHTML = dropdown("filter", v, FILTER_STATUSES, "Фільтр за статусом", "left");
+    $('[data-dd="filter"] .dd-btn').focus();
+    renderList();
+  };
   $("#search").oninput = e => { state.q = e.target.value.trim().toLowerCase(); renderList(); };
 }
 
@@ -180,7 +261,7 @@ function renderList() {
     (state.status === "all" || (state.status === "open" ? ["new", "confirmed"].includes(l.status) : l.status === state.status)) &&
     (!state.q || [l.code, l.name, l.phone, l.address, l.data?.company].join(" ").toLowerCase().includes(state.q)));
   $("#list").innerHTML = rows.length ? rows.map(leadHTML).join("") : `<div class="card empty muted">Заявок за цими фільтрами немає.</div>`;
-  $("#list").querySelectorAll("[data-status]").forEach(s => s.onchange = () => save(s.dataset.status, { status: s.value }, s));
+  rows.forEach(l => { ddHandlers["st-" + l.id] = (v, btn) => save(l.id, { status: v }, btn); });
   $("#list").querySelectorAll("[data-note]").forEach(b => b.onclick = () => save(b.dataset.note, { admin_note: $(`#note-${b.dataset.note}`).value }, b));
 }
 
@@ -197,8 +278,7 @@ function leadHTML(l) {
       <span class="tag ${esc(l.status)}">${STATUSES[l.status] || esc(l.status)}</span>
       <span class="muted" style="font-size:13px">надійшла ${esc(kyiv(l.created_at, { dateStyle: "short", timeStyle: "short" }))}</span>
       <span class="sp"></span>
-      <label class="sr-only" for="st-${l.id}">Статус</label>
-      <select id="st-${l.id}" data-status="${l.id}">${Object.entries(STATUSES).map(([v, t]) => `<option value="${v}" ${v === l.status ? "selected" : ""}>${t}</option>`).join("")}</select>
+      ${dropdown("st-" + l.id, l.status, STATUSES, "Статус заявки " + (l.code || l.id))}
     </div>
     <div class="grid">
       ${cell("Клієнт", `<span class="big">${esc(l.name || "—")}</span><br><a href="tel:${esc(l.phone)}">${esc(l.phone)}</a>${d.contact ? ` · ${esc(CONTACTS[d.contact] || d.contact)}` : ""}`)}
@@ -226,7 +306,7 @@ async function save(id, patch, el) {
     return load();
   }
   Object.assign(state.leads.find(l => String(l.id) === String(id)), patch);
-  if (el.tagName === "BUTTON") { el.textContent = "Збережено ✓"; setTimeout(() => el.textContent = "Зберегти", 1500); }
+  if (el.dataset.note) { el.textContent = "Збережено ✓"; setTimeout(() => el.textContent = "Зберегти", 1500); }
   else renderList();
 }
 
