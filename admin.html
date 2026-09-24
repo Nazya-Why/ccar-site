@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>CCar — заявки</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Unbounded:wght@600&display=swap">
+<style>
+:root{
+  --bg:#F4F7FB; --surface:#fff; --surface-2:#EEF3F9; --text:#0F172A; --muted:#5B6B82; --border:#DCE4EE;
+  --primary:#0B3D91; --accent:#00C2D1; --accent-soft:#DDF6F9; --accent-text:#00717A;
+  --ok:#15803D; --ok-soft:#DCFCE7; --warn:#B45309; --warn-soft:#FEF3C7; --err:#B91C1C; --err-soft:#FEE2E2;
+  --shadow:0 10px 30px -18px rgba(11,61,145,.35);
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0B1220; --surface:#111B2E; --surface-2:#18243B; --text:#E6EDF7; --muted:#93A3BA; --border:#243350;
+  --accent-soft:#0E3440; --accent-text:#5EE3EE;
+  --ok:#4ADE80; --ok-soft:#10301F; --warn:#FBBF24; --warn-soft:#352812; --err:#F87171; --err-soft:#3A1717;
+  --shadow:0 10px 30px -18px rgba(0,0,0,.7);
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:500 15px/1.5 Manrope,system-ui,sans-serif}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{max-width:1100px;margin:0 auto;padding:20px 16px 60px}
+header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.logo{display:flex;align-items:center;gap:10px;font:600 20px Unbounded,sans-serif;text-decoration:none;color:inherit}
+.logo b{color:var(--accent)}
+header .sp{flex:1}
+.muted{color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:40px;padding:0 16px;border-radius:10px;border:1px solid var(--border);background:var(--surface);cursor:pointer;font-weight:700}
+.btn:hover{background:var(--surface-2)}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:#04262B}
+.btn-primary:hover{background:#00AEBB}
+.btn:disabled{opacity:.6;cursor:default}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow)}
+.login{max-width:380px;margin:12vh auto 0;padding:28px;display:grid;gap:14px}
+.login h1{margin:0;font:600 22px Unbounded,sans-serif}
+label{display:grid;gap:6px;font-weight:700;font-size:14px}
+input,select,textarea{width:100%;min-height:42px;padding:8px 12px;border-radius:10px;border:1px solid var(--border);background:var(--surface)}
+textarea{min-height:64px;resize:vertical}
+input:focus-visible,select:focus-visible,textarea:focus-visible,.btn:focus-visible,.chip:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.alert{padding:10px 14px;border-radius:10px;font-weight:600;font-size:14px}
+.alert.err{background:var(--err-soft);color:var(--err)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+.stat{padding:14px 16px}
+.stat b{display:block;font:600 26px Unbounded,sans-serif}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;align-items:center}
+.chip{min-height:36px;padding:0 14px;border-radius:999px;border:1px solid var(--border);background:var(--surface);cursor:pointer;font-weight:700;font-size:14px}
+.chip[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-text)}
+.filters input{max-width:240px;min-height:36px;margin-left:auto}
+.list{display:grid;gap:12px}
+.lead{padding:16px;display:grid;gap:12px}
+.lead-top{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.code{font-weight:800}
+.tag{display:inline-block;padding:2px 10px;border-radius:999px;font-size:12.5px;font-weight:800;background:var(--surface-2);color:var(--muted)}
+.tag.new{background:var(--warn-soft);color:var(--warn)}
+.tag.confirmed{background:var(--accent-soft);color:var(--accent-text)}
+.tag.done{background:var(--ok-soft);color:var(--ok)}
+.tag.cancelled{background:var(--err-soft);color:var(--err)}
+.lead-top .sp{flex:1}
+.lead-top select{width:auto;min-height:36px}
+.grid{display:grid;gap:6px 20px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.grid div{min-width:0;overflow-wrap:anywhere}
+.grid small{display:block;color:var(--muted);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.big{font-weight:800;font-size:16px}
+a{color:var(--accent-text)}
+.note{display:flex;gap:8px;align-items:flex-start}
+.note textarea{min-height:42px}
+.empty{padding:40px 16px;text-align:center}
+.setup{padding:24px;max-width:640px;margin:10vh auto 0;display:grid;gap:10px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+<div class="wrap" id="app" aria-live="polite"></div>
+
+<script src="supabase-config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script>
+const $ = (s, r = document) => r.querySelector(s);
+const app = $("#app");
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const fmt = n => n == null ? "—" : Number(n).toLocaleString("uk-UA");
+const TYPES = { booking: "Запис", callback: "Передзвонити", b2b: "B2B" };
+const STATUSES = { new: "Нова", confirmed: "Підтверджена", done: "Виконана", cancelled: "Скасована" };
+const PLACES = { yard: "Двір / вулиця", parking: "Підземний паркінг", office: "Біля офісу", mall: "Парковка ТЦ" };
+const CONTACTS = { call: "Дзвінок", telegram: "Telegram", viber: "Viber", sms: "SMS" };
+const CLASSES = { sedan: "Седан / хетчбек", crossover: "Кросовер", suv: "Позашляховик", van: "Мінівен / бус" };
+const kyiv = (iso, opts) => new Date(iso).toLocaleString("uk-UA", { timeZone: "Europe/Kyiv", ...opts });
+
+const cfg = window.CCAR_SUPABASE || {};
+if (!cfg.url || !cfg.anonKey) {
+  app.innerHTML = `<div class="card setup"><h1 style="margin:0;font:600 20px Unbounded">База ще не підключена</h1>
+    <p class="muted" style="margin:0">Впишіть адресу проєкту й публічний ключ Supabase у файл <b>supabase-config.js</b>, а потім оновіть сторінку.</p></div>`;
+  throw new Error("Supabase not configured");
+}
+const sb = supabase.createClient(cfg.url, cfg.anonKey);
+const state = { leads: [], type: "all", status: "open", q: "" };
+
+function renderLogin(msg = "") {
+  app.innerHTML = `<form class="card login" id="loginForm">
+    <h1>CCar · заявки</h1>
+    <p class="muted" style="margin:0">Вхід для адміністратора</p>
+    ${msg ? `<div class="alert err" role="alert">${esc(msg)}</div>` : ""}
+    <label>Email<input type="email" name="email" autocomplete="username" required></label>
+    <label>Пароль<input type="password" name="password" autocomplete="current-password" required></label>
+    <button class="btn btn-primary" type="submit">Увійти</button>
+  </form>`;
+  $("#loginForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    const btn = e.target.querySelector("button"); btn.disabled = true; btn.textContent = "Входимо…";
+    const f = new FormData(e.target);
+    const { error } = await sb.auth.signInWithPassword({ email: f.get("email"), password: f.get("password") });
+    if (error) renderLogin("Невірний email або пароль.");
+    else start();
+  });
+  $("#loginForm input").focus();
+}
+
+async function start() {
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session) return renderLogin();
+  const { data: isAdmin } = await sb.rpc("is_admin");
+  if (!isAdmin) { await sb.auth.signOut(); return renderLogin("Цей акаунт не має доступу до заявок."); }
+  renderShell();
+  await load();
+  clearInterval(start.timer); start.timer = setInterval(load, 60000);
+}
+
+function renderShell() {
+  app.innerHTML = `
+    <header>
+      <a class="logo" href="./"><svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="#0B3D91"/><path d="M20 7 C20 7 29 17 29 23 A9 9 0 0 1 11 23 C11 17 20 7 20 7Z" fill="#00C2D1"/><path d="M15.5 23.5 A4.5 4.5 0 0 0 20 28" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg><span>C<b>Car</b></span></a>
+      <span class="muted">Заявки</span><span class="sp"></span>
+      <button class="btn" id="reload" type="button">Оновити</button>
+      <button class="btn" id="logout" type="button">Вийти</button>
+    </header>
+    <div class="stats" id="stats"></div>
+    <div class="filters" role="group" aria-label="Фільтри">
+      ${[["all", "Усі"], ["booking", "Записи"], ["callback", "Передзвонити"], ["b2b", "B2B"]].map(([v, t]) => `<button class="chip" type="button" data-type="${v}">${t}</button>`).join("")}
+      <select id="statusSel" aria-label="Статус" style="width:auto;min-height:36px">
+        <option value="open">Активні (нові й підтверджені)</option><option value="all">Усі статуси</option>
+        ${Object.entries(STATUSES).map(([v, t]) => `<option value="${v}">${t}</option>`).join("")}
+      </select>
+      <input id="search" type="search" placeholder="Пошук: ім'я, телефон, адреса, CC-…" aria-label="Пошук">
+    </div>
+    <div class="list" id="list"></div>`;
+  $("#reload").onclick = load;
+  $("#logout").onclick = async () => { clearInterval(start.timer); await sb.auth.signOut(); renderLogin(); };
+  app.querySelectorAll("[data-type]").forEach(b => b.onclick = () => { state.type = b.dataset.type; renderList(); });
+  $("#statusSel").value = state.status;
+  $("#statusSel").onchange = e => { state.status = e.target.value; renderList(); };
+  $("#search").oninput = e => { state.q = e.target.value.trim().toLowerCase(); renderList(); };
+}
+
+async function load() {
+  const { data, error } = await sb.from("leads").select("*").order("created_at", { ascending: false }).limit(500);
+  if (error) { $("#list").innerHTML = `<div class="alert err">Не вдалося завантажити заявки: ${esc(error.message)}</div>`; return; }
+  state.leads = data; renderList();
+}
+
+function renderList() {
+  app.querySelectorAll("[data-type]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.type === state.type)));
+  const today = kyiv(new Date().toISOString(), { dateStyle: "short" });
+  const L = state.leads;
+  const upcoming = L.filter(l => l.type === "booking" && l.status !== "cancelled" && l.starts_at && new Date(l.starts_at) > new Date());
+  $("#stats").innerHTML = [
+    ["Нові", L.filter(l => l.status === "new").length],
+    ["Сьогодні надійшло", L.filter(l => kyiv(l.created_at, { dateStyle: "short" }) === today).length],
+    ["Майбутні записи", upcoming.length],
+    ["Сума майбутніх, грн", fmt(upcoming.reduce((s, l) => s + (l.total || 0), 0))]
+  ].map(([t, v]) => `<div class="card stat"><span class="muted">${t}</span><b>${v}</b></div>`).join("");
+
+  const rows = L.filter(l =>
+    (state.type === "all" || l.type === state.type) &&
+    (state.status === "all" || (state.status === "open" ? ["new", "confirmed"].includes(l.status) : l.status === state.status)) &&
+    (!state.q || [l.code, l.name, l.phone, l.address, l.data?.company].join(" ").toLowerCase().includes(state.q)));
+  $("#list").innerHTML = rows.length ? rows.map(leadHTML).join("") : `<div class="card empty muted">Заявок за цими фільтрами немає.</div>`;
+  $("#list").querySelectorAll("[data-status]").forEach(s => s.onchange = () => save(s.dataset.status, { status: s.value }, s));
+  $("#list").querySelectorAll("[data-note]").forEach(b => b.onclick = () => save(b.dataset.note, { admin_note: $(`#note-${b.dataset.note}`).value }, b));
+}
+
+function leadHTML(l) {
+  const d = l.data || {};
+  const cell = (label, html) => html ? `<div><small>${label}</small>${html}</div>` : "";
+  const when = l.starts_at ? `<span class="big">${esc(kyiv(l.starts_at, { weekday: "short", day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" }))}</span>` : "";
+  const services = Array.isArray(d.lines) ? d.lines.map(x => `${esc(x[0])} — ${fmt(x[1])} грн`).join("<br>") : "";
+  const place = [PLACES[d.place], d.placeNote, d.district].filter(Boolean).map(esc).join(" · ");
+  return `<article class="card lead">
+    <div class="lead-top">
+      <span class="code">${esc(l.code || "#" + l.id)}</span>
+      <span class="tag">${TYPES[l.type] || esc(l.type)}</span>
+      <span class="tag ${esc(l.status)}">${STATUSES[l.status] || esc(l.status)}</span>
+      <span class="muted" style="font-size:13px">надійшла ${esc(kyiv(l.created_at, { dateStyle: "short", timeStyle: "short" }))}</span>
+      <span class="sp"></span>
+      <label class="sr-only" for="st-${l.id}">Статус</label>
+      <select id="st-${l.id}" data-status="${l.id}">${Object.entries(STATUSES).map(([v, t]) => `<option value="${v}" ${v === l.status ? "selected" : ""}>${t}</option>`).join("")}</select>
+    </div>
+    <div class="grid">
+      ${cell("Клієнт", `<span class="big">${esc(l.name || "—")}</span><br><a href="tel:${esc(l.phone)}">${esc(l.phone)}</a>${d.contact ? ` · ${esc(CONTACTS[d.contact] || d.contact)}` : ""}`)}
+      ${cell("Коли", when)}
+      ${cell("Адреса", l.address ? `${esc(l.address)}${place ? `<br><span class="muted">${place}</span>` : ""}` : "")}
+      ${cell("Сума", l.total != null ? `<span class="big">${fmt(l.total)} грн</span>${l.duration ? `<br><span class="muted">≈ ${Math.round(l.duration / 5) * 5} хв на місці</span>` : ""}` : "")}
+      ${cell("Послуги", services ? `${services}${d.cls ? `<br><span class="muted">${esc(CLASSES[d.cls] || d.cls)}</span>` : ""}` : "")}
+      ${cell("Компанія", d.company ? `${esc(d.company)}${d.fleet ? ` · авто: ${esc(d.fleet)}` : ""}` : "")}
+      ${cell("Коментар клієнта", [d.comment, d.note].filter(Boolean).map(esc).join("<br>"))}
+    </div>
+    <div class="note">
+      <label class="sr-only" for="note-${l.id}">Нотатка</label>
+      <textarea id="note-${l.id}" placeholder="Нотатка для себе (клієнт її не бачить)">${esc(l.admin_note)}</textarea>
+      <button class="btn" type="button" data-note="${l.id}">Зберегти</button>
+    </div>
+  </article>`;
+}
+
+async function save(id, patch, el) {
+  el.disabled = true;
+  const { error } = await sb.from("leads").update(patch).eq("id", id);
+  el.disabled = false;
+  if (error) {
+    alert(error.code === "23P01" ? "Не можна: на цей час уже є інший активний запис." : "Не вдалося зберегти: " + error.message);
+    return load();
+  }
+  Object.assign(state.leads.find(l => String(l.id) === String(id)), patch);
+  if (el.tagName === "BUTTON") { el.textContent = "Збережено ✓"; setTimeout(() => el.textContent = "Зберегти", 1500); }
+  else renderList();
+}
+
+start();
+</script>
+</body>
+</html>

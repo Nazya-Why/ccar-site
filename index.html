@@ -1249,6 +1249,7 @@ details.more .opt-list{margin-top:12px}
 </dialog>
 
 <script src="https://cdn.jsdelivr.net/npm/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+<script src="supabase-config.js"></script>
 <script>
 (() => {
 "use strict";
@@ -1429,8 +1430,22 @@ document.addEventListener("click", e => {
 /* =========================================================
    ВІДПРАВКА ЗАЯВОК — ТОЧКА ІНТЕГРАЦІЇ
    ========================================================= */
+/* Supabase: заявки й зайнятий час. Налаштування — у supabase-config.js, схема — supabase/schema.sql */
+const SB = window.CCAR_SUPABASE || {};
+const sbOn = () => Boolean(SB.url && SB.anonKey);
+async function sbRpc(fn, args) {
+  const res = await fetch(`${SB.url.replace(/\/$/, "")}/rest/v1/rpc/${fn}`, {
+    method: "POST",
+    headers: { apikey: SB.anonKey, "Content-Type": "application/json" },
+    body: JSON.stringify(args)
+  });
+  if (!res.ok) { const e = new Error(res.status === 409 ? "slot_taken" : "server"); e.status = res.status; throw e; }
+  return res.json();
+}
+
 async function sendLead(type, payload) {
   const body = { type, ...payload, page: location.href, sentAt: new Date().toISOString() };
+  if (sbOn()) return { ok: true, id: await sbRpc("create_lead", { p: body }) };
   if (CONFIG.leadEndpoint) {
     /* Серверна функція (Vercel/Netlify/Cloudflare) пересилає дані:
        - Telegram: POST https://api.telegram.org/bot<TOKEN>/sendMessage { chat_id, text }
@@ -1845,33 +1860,50 @@ const isoDate = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, 
 const parseDate = s => { const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d); };
 const humanDate = s => { const d = parseDate(s); return `${DAY[d.getDay()]}, ${d.getDate()} ${MON_FULL[d.getMonth()]}`; };
 function days() { const out = [], t = new Date(); t.setHours(0, 0, 0, 0); for (let i = 0; i < 14; i++) { const d = new Date(t); d.setDate(t.getDate() + i); out.push(d); } return out; }
-/* ПРОДАКШН: завантажувати вільні слоти з API (Google Calendar / CRM). Тут — детермінована імітація зайнятості. */
-function slotsFor(dateStr) {
+/* Зайнятість: з Supabase (busy_slots), якщо підключено; інакше — детермінована демо-імітація.
+   ranges — зайняті проміжки [start_min, end_min) у хвилинах від 00:00; слот зайнятий, якщо мийка тривалістю dur з ним перетинається. */
+function slotsFor(dateStr, ranges, dur) {
   const d = parseDate(dateStr), now = new Date(), out = [];
   for (let h = 8; h <= 20; h++) {
-    const seed = (d.getDate() * 37 + (d.getMonth() + 1) * 11 + h * 7) % 10;
-    let busy = seed < 3;
+    let busy;
+    if (ranges) {
+      const s = h * 60, e = s + dur;
+      busy = ranges.some(r => s < r.end_min && e > r.start_min);
+    } else {
+      busy = (d.getDate() * 37 + (d.getMonth() + 1) * 11 + h * 7) % 10 < 3;
+    }
     if (isoDate(now) === dateStr && h <= now.getHours() + 1) busy = true;
     out.push({ t: `${String(h).padStart(2, "0")}:00`, busy });
   }
   return out;
+}
+async function busyRanges(dateStr) {
+  if (!sbOn()) return null;
+  try { return await sbRpc("busy_slots", { d: dateStr }); }
+  catch { return null; } // база недоступна — показуємо сітку, а конфлікт відловить create_lead
 }
 function renderDates() {
   if (!W.date || parseDate(W.date) < new Date(new Date().toDateString())) W.date = isoDate(days()[0]);
   $("#bkDates").innerHTML = days().map((d, i) => { const s = isoDate(d); return `<button type="button" class="date-btn" data-date="${s}" aria-pressed="${s === W.date}" aria-label="${humanDate(s)}"><small>${i === 0 ? "Сьогодні" : i === 1 ? "Завтра" : DAY[d.getDay()]}</small><b>${d.getDate()}</b><small>${MON[d.getMonth()]}</small></button>`; }).join("");
   renderSlots(true);
 }
-let slotTimer;
+let slotTimer, slotReq = 0, slotRanges = null;
 function renderSlots(loading) {
   const box = $("#bkSlots");
   if (loading) {
     box.setAttribute("aria-busy", "true");
     box.innerHTML = `<div class="slots">${Array.from({ length: 8 }, () => `<div class="skeleton"></div>`).join("")}</div><span class="sr-only">Перевіряємо вільний час…</span>`;
-    clearTimeout(slotTimer); slotTimer = setTimeout(() => renderSlots(false), reduceMotion ? 0 : 380);
+    clearTimeout(slotTimer);
+    const req = ++slotReq, date = W.date;
+    const wait = new Promise(r => { slotTimer = setTimeout(r, reduceMotion ? 0 : 380); });
+    Promise.all([busyRanges(date), wait]).then(([ranges]) => {
+      if (req !== slotReq) return; // користувач уже обрав інший день
+      slotRanges = ranges; renderSlots(false);
+    });
     return;
   }
   box.removeAttribute("aria-busy");
-  const sl = slotsFor(W.date), free = sl.filter(s => !s.busy);
+  const sl = slotsFor(W.date, slotRanges, wQuote().dur), free = sl.filter(s => !s.busy);
   if (W.time && !free.some(s => s.t === W.time)) W.time = null;
   if (!free.length) {
     box.innerHTML = `<div class="alert info">${icon("calendar-x")}<p><b>На цей день вільних вікон уже немає.</b> Оберіть інший день або <a href="${CONFIG.telegram}" target="_blank" rel="noopener">напишіть у Telegram</a> — спробуємо вписати вас між записами.</p></div>`;
@@ -1961,8 +1993,13 @@ async function submitBooking() {
     setupCalendar(res.id);
     showStep(6);
     store.del(DRAFT_KEY);
-  } catch {
-    $("#bkError").innerHTML = `<div class="alert error">${icon("wifi-off")}<p><b>Запис не надіслано — схоже, зник інтернет.</b> Дані збережено: натисніть «Підтвердити запис» ще раз або напишіть нам у <a href="${CONFIG.telegram}" target="_blank" rel="noopener">Telegram</a>.</p></div>`;
+  } catch (err) {
+    if (err.message === "slot_taken") {
+      W.time = null; showStep(3);
+      setErr("#bk-slot-err", `Цей час щойно зайняли — оберіть інший, будь ласка.`);
+      return;
+    }
+    $("#bkError").innerHTML = `<div class="alert error">${icon("wifi-off")}<p><b>${err.status ? "Запис не надіслано — помилка сервера." : "Запис не надіслано — схоже, зник інтернет."}</b> Дані збережено: натисніть «Підтвердити запис» ще раз або напишіть нам у <a href="${CONFIG.telegram}" target="_blank" rel="noopener">Telegram</a>.</p></div>`;
     next.innerHTML = `Спробувати ще раз ${icon("rotate-cw")}`;
     refreshIcons();
   } finally { next.disabled = back.disabled = false; }
