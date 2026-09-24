@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Виїзна мийка авто у Львові — CCar | Мийка з виїздом за 60 хв</title>
+<title>Виїзна мийка авто у Львові — CCar | Мийка з виїздом за 60 хв</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta name="description" content="Виїзна мийка авто у Львові: приїдемо додому, в офіс чи на паркінг ТЦ за 60 хв. Своя вода й електрика, екозасоби, фіксовані ціни від 675 грн, оплата після роботи.">
 <meta name="keywords" content="виїзна мийка авто Львів, мийка авто з виїздом, хімчистка салону на виїзді, мобільна мийка Львів">
@@ -65,7 +65,7 @@
     { "@type": "Question", "name": "Чи потрібна вам вода чи електрика?", "acceptedAnswer": { "@type": "Answer", "text": "Ні. Возимо 200 л очищеної води та тихий генератор. Від вас — лише місце, де стоїть авто." } },
     { "@type": "Question", "name": "Чи можна мити на підземному паркінгу?", "acceptedAnswer": { "@type": "Answer", "text": "Так. Під авто кладемо водозбірний килим, тож підлога паркінгу залишається сухою." } },
     { "@type": "Question", "name": "Скільки триває мийка?", "acceptedAnswer": { "@type": "Answer", "text": "Експрес — близько 30 хв, комплексна — 1–1,5 год, хімчистка салону — близько 3 год." } },
-    { "@type": "Question", "name": "Що буде, якщо піде дощ?", "acceptedAnswer": { "@type": "Answer", "text": "Під навісом і на паркінгу працюємо в будь-яку погоду. Мийку на відкритій парковці безкоштовно перенесемо." } },
+    { "@type": "Question", "name": "Що буде, якщо піде дощ?", "acceptedAnswer": { "@type": "Answer", "text": "Під навісом і на паркінгу працюємо в будь‑яку погоду. Мийку на відкритій парковці безкоштовно перенесемо." } },
     { "@type": "Question", "name": "Як оплатити?", "acceptedAnswer": { "@type": "Answer", "text": "Після роботи: готівкою, карткою, переказом або за рахунком для юросіб." } },
     { "@type": "Question", "name": "Чи не пошкодить мийка фарбу?", "acceptedAnswer": { "@type": "Answer", "text": "Ні. pH-нейтральна піна, метод двох відер, окремі мікрофібри. Відповідальність застрахована на 500 000 грн." } }
   ]
@@ -243,6 +243,8 @@ svg.lucide{width:1.25em;height:1.25em;stroke-width:2;flex:none;vertical-align:mi
 .mobile-menu a.mm-link{display:flex;align-items:center;justify-content:space-between;min-height:56px;padding:0 16px;border-radius:12px;font-size:20px;font-weight:700;color:var(--text);text-decoration:none;background:var(--surface-2)}
 .mobile-menu .mm-contacts{display:grid;gap:8px;margin-top:24px}
 @media (min-width:1180px){.mobile-menu{display:none!important}}
+
+
 
 /* ============ HERO ============ */
 .hero{position:relative;overflow:hidden;padding-block:32px 64px;background:
@@ -660,6 +662,24 @@ details.more .opt-list{margin-top:12px}
   .reveal{transition:opacity .6s ease,transform .6s ease}
   .reveal.pre{opacity:.35;transform:translateY(18px)}
 }
+/* ============ ТЕЛЕФОН: акуратніший текст і шапка ============ */
+h1,h2,h3{text-wrap:balance}
+p,li{text-wrap:pretty}
+.logo{flex:none}
+.logo small{white-space:nowrap}
+@media (max-width:767px){
+  .header-inner{gap:12px}
+  .header-actions{gap:6px}
+  .header-actions .icon-btn{width:42px;height:42px}
+  .phone-icon{display:none}               /* дзвінок є в нижній панелі й у меню */
+  .hero-kicker{border-radius:14px;font-size:13px;text-wrap:balance;line-height:1.35}
+  .hero-price strong{white-space:nowrap}
+}
+@media (max-width:420px){
+  .final{padding:28px 16px;border-radius:24px}
+  .final .card{padding:20px 16px}
+}
+@media (max-width:359px){.logo small{display:none}}
 </style>
 </head>
 <body>
@@ -733,7 +753,7 @@ details.more .opt-list{margin-top:12px}
       </ul>
     </nav>
     <div class="header-actions">
-      <a class="header-phone js-tel" href="tel:+380671234567" data-track="click_call" data-track-src="header"><span><span class="js-phone-text">+380 67 123 45 67</span><small>● Працюємо зараз</small></span></a>
+      <a class="header-phone js-tel" href="tel:+380671234567" data-track="click_call" data-track-src="header"><span><span class="js-phone-text">+380 67 123 45 67</span><small>● Працюємо зараз</small></span></a>
       <button class="icon-btn lang-btn" type="button" id="langBtn" aria-label="Switch to English">EN</button>
       <button class="icon-btn" type="button" id="themeBtn" aria-label="Увімкнути темну тему"><i data-lucide="moon"></i></button>
       <a class="icon-btn phone-icon js-tel" href="tel:+380671234567" aria-label="Подзвонити: +380 67 123 45 67" data-track="click_call" data-track-src="header_mobile"><i data-lucide="phone"></i></a>
@@ -756,7 +776,7 @@ details.more .opt-list{margin-top:12px}
   </nav>
   <div class="mm-contacts">
     <button class="btn btn-primary btn-lg btn-block" type="button" data-book data-track-src="mobile_menu">Записатися онлайн</button>
-    <a class="btn btn-secondary btn-block js-tel" href="tel:+380671234567" data-track="click_call" data-track-src="mobile_menu"><i data-lucide="phone"></i> <span class="js-phone-text">+380 67 123 45 67</span></a>
+    <a class="btn btn-secondary btn-block js-tel" href="tel:+380671234567" data-track="click_call" data-track-src="mobile_menu"><i data-lucide="phone"></i> <span class="js-phone-text">+380 67 123 45 67</span></a>
     <a class="btn btn-secondary btn-block js-tg" href="https://t.me/ccar_lviv" target="_blank" rel="noopener" data-track="click_telegram" data-track-src="mobile_menu"><i data-lucide="send"></i> Написати в Telegram</a>
   </div>
 </div>
@@ -767,16 +787,16 @@ details.more .opt-list{margin-top:12px}
 <section class="hero" aria-labelledby="hero-title">
   <div class="container hero-grid">
     <div class="hero-copy">
-      <span class="hero-kicker"><span class="dot" aria-hidden="true"></span><span data-i18n="hero.kicker">Сьогодні є вільні вікна · Львів і передмістя</span></span>
-      <h1 id="hero-title" data-i18n-html="hero.title">Чисте авто там, де вам зручно — <em>без черг і поїздок</em></h1>
+      <span class="hero-kicker"><span class="dot" aria-hidden="true"></span><span data-i18n="hero.kicker">Сьогодні є вільні вікна · Львів і передмістя</span></span>
+      <h1 id="hero-title" data-i18n-html="hero.title">Чисте авто там, де вам зручно — <em>без черг і поїздок</em></h1>
       <p class="hero-sub" data-i18n="hero.sub">Приїдемо додому, до офісу чи на паркінг ТЦ і помиємо авто своєю водою та на своїй електриці. Ви займаєтесь справами, а платите вже після мийки.</p>
-      <p class="hero-price muted">Експрес-мийка — <strong>від 675 грн</strong>, комплексна — <strong>від 1 350 грн</strong></p>
+      <p class="hero-price muted">Експрес-мийка — <strong>від 675 грн</strong>, комплексна — <strong>від 1 350 грн</strong></p>
       <div class="hero-ctas">
         <button class="btn btn-primary btn-lg" type="button" data-book data-track-src="hero"><span data-i18n="hero.cta1">Записатися онлайн</span> <i data-lucide="arrow-right"></i></button>
         <a class="btn btn-secondary btn-lg" href="#calculator" data-track="click_calc" data-track-src="hero"><i data-lucide="calculator"></i> <span data-i18n="hero.cta2">Розрахувати вартість</span></a>
       </div>
       <ul class="trust" aria-label="Чому нам довіряють">
-        <li><i data-lucide="timer"></i> <span data-i18n="trust.1">Приїдемо за 60 хв</span></li>
+        <li><i data-lucide="timer"></i> <span data-i18n="trust.1">Приїдемо за 60 хв</span></li>
         <li><i data-lucide="users"></i> <span data-i18n="trust.2">500+ задоволених клієнтів</span></li>
         <li><span class="stars" aria-hidden="true">★</span> <span data-i18n="trust.3">Рейтинг 4.9 у Google</span></li>
       </ul>
@@ -785,8 +805,8 @@ details.more .opt-list{margin-top:12px}
       <div class="scene scene--photo">
         <img class="photo" src="img/hero.jpg" width="1152" height="928" alt="Майстер CCar наносить активну піну на синій седан на парковці біля будинку" fetchpriority="high">
       </div>
-      <div class="scene-badge b1"><span class="ico"><i data-lucide="map-pin"></i><span class="live" aria-hidden="true"></span></span><span>Майстер уже в дорозі<small>Прибуде за 42 хв</small></span></div>
-      <div class="scene-badge b2"><span class="ico"><i data-lucide="droplets"></i></span><span>15 л води<small>замість 150 на мийці</small></span></div>
+      <div class="scene-badge b1"><span class="ico"><i data-lucide="map-pin"></i><span class="live" aria-hidden="true"></span></span><span>Майстер уже в дорозі<small>Прибуде за 42 хв</small></span></div>
+      <div class="scene-badge b2"><span class="ico"><i data-lucide="droplets"></i></span><span>15 л води<small>замість 150 на мийці</small></span></div>
     </div>
   </div>
 </section>
@@ -796,13 +816,13 @@ details.more .opt-list{margin-top:12px}
   <div class="container">
     <div class="section-head">
       <span class="eyebrow">Як це працює</span>
-      <h2 id="how-title">Чотири кроки — і жодної хвилини в черзі</h2>
+      <h2 id="how-title">Чотири кроки — і жодної хвилини в черзі</h2>
       <p class="lead">Запис займає близько 2 хвилин. Далі все робимо ми.</p>
     </div>
     <ol class="steps">
       <li class="step reveal"><div class="step-top"><span class="step-ico"><i data-lucide="list-checks"></i></span><span class="step-num" aria-hidden="true">01</span></div><h3>Оберіть послугу</h3><p>Калькулятор одразу покаже ціну й тривалість для вашого авто.</p></li>
-      <li class="step reveal"><div class="step-top"><span class="step-ico"><i data-lucide="map-pin"></i></span><span class="step-num" aria-hidden="true">02</span></div><h3>Вкажіть адресу й час</h3><p>Двір, офіс, підземний паркінг чи ТЦ. Вільні вікна — з 08:00 до 20:00.</p></li>
-      <li class="step reveal"><div class="step-top"><span class="step-ico"><i data-lucide="truck"></i></span><span class="step-num" aria-hidden="true">03</span></div><h3>Ми приїжджаємо</h3><p>Майстер з водою й обладнанням. Бути поруч не обов’язково — достатньо залишити ключ.</p></li>
+      <li class="step reveal"><div class="step-top"><span class="step-ico"><i data-lucide="map-pin"></i></span><span class="step-num" aria-hidden="true">02</span></div><h3>Вкажіть адресу й час</h3><p>Двір, офіс, підземний паркінг чи ТЦ. Вільні вікна — з 08:00 до 20:00.</p></li>
+      <li class="step reveal"><div class="step-top"><span class="step-ico"><i data-lucide="truck"></i></span><span class="step-num" aria-hidden="true">03</span></div><h3>Ми приїжджаємо</h3><p>Майстер з водою й обладнанням. Бути поруч не обов’язково — достатньо залишити ключ.</p></li>
       <li class="step reveal"><div class="step-top"><span class="step-ico"><i data-lucide="wallet"></i></span><span class="step-num" aria-hidden="true">04</span></div><h3>Оплата після результату</h3><p>Спершу надішлемо фото «до/після», оплата потім: карткою, готівкою або переказом.</p></li>
     </ol>
   </div>
@@ -813,7 +833,7 @@ details.more .opt-list{margin-top:12px}
   <div class="container">
     <div class="section-head">
       <span class="eyebrow">Послуги</span>
-      <h2 id="services-title">Від швидкої мийки до кераміки — на вашій парковці</h2>
+      <h2 id="services-title">Від швидкої мийки до кераміки — на вашій парковці</h2>
       <p class="lead">Ціни вказані для седана. Для кросовера, позашляховика чи мінівена точну суму порахує калькулятор нижче.</p>
     </div>
     <div class="grid-3" id="servicesGrid"><!-- рендериться з даних SERVICES --></div>
@@ -847,11 +867,11 @@ details.more .opt-list{margin-top:12px}
         <span class="label" id="calc-sum-title">Ваш набір</span>
         <div>
           <div class="calc-total" aria-live="polite" aria-atomic="true"><span id="calcTotal" class="tabnum">1350</span> <small>грн</small></div>
-          <div class="calc-dur" style="margin-top:10px"><i data-lucide="clock"></i> <span id="calcDur">≈ 1 год 15 хв</span></div>
+          <div class="calc-dur" style="margin-top:10px"><i data-lucide="clock"></i> <span id="calcDur">≈ 1 год 15 хв</span></div>
         </div>
         <ul class="calc-lines" id="calcLines"></ul>
         <button class="btn btn-primary btn-lg btn-block" type="button" id="calcBook" data-track-src="calculator">Записатися з цим набором <i data-lucide="arrow-right"></i></button>
-        <p class="calc-note"><i data-lucide="shield-check"></i> Оплата після роботи. Не сподобається результат — безкоштовно перемиємо протягом 24 год.</p>
+        <p class="calc-note"><i data-lucide="shield-check"></i> Оплата після роботи. Не сподобається результат — безкоштовно перемиємо протягом 24 год.</p>
         <p class="proof" style="color:#fff;position:relative;z-index:1"><span class="stars" aria-hidden="true">★★★★★</span> 4.9 · 312 відгуків у Google</p>
       </aside>
     </div>
@@ -872,11 +892,11 @@ details.more .opt-list{margin-top:12px}
       <div>
         <span class="pill"><i data-lucide="repeat"></i> Абонемент</span>
         <h3 id="sub-title" style="font-family:var(--font-display);font-weight:600;font-size:26px;margin-top:12px">Чисте авто щотижня без запису щоразу</h3>
-        <p class="muted" style="margin-top:10px">Обираєте день і час один раз, далі ми приїжджаємо самі. Абонемент можна поставити на паузу, наприклад на відпустку, і скасувати в будь-який момент.</p>
+        <p class="muted" style="margin-top:10px">Обираєте день і час один раз, далі ми приїжджаємо самі. Абонемент можна поставити на паузу, наприклад на відпустку, і скасувати в будь‑який момент.</p>
       </div>
       <div class="sub-opts">
-        <div class="sub-opt"><span class="muted" style="font-weight:700">2 комплексні / міс</span><b class="big tabnum">2 430 грн</b><span class="pill">−10% · економія 270 грн</span><button class="btn btn-secondary btn-sm" type="button" data-book data-book-note="Абонемент: 2 комплексні мийки на місяць" data-book-services="complex" data-track-src="subscription_2">Оформити</button></div>
-        <div class="sub-opt"><span class="muted" style="font-weight:700">4 комплексні / міс</span><b class="big tabnum">4 320 грн</b><span class="pill">−20% · економія 1 080 грн</span><button class="btn btn-dark btn-sm" type="button" data-book data-book-note="Абонемент: 4 комплексні мийки на місяць" data-book-services="complex" data-track-src="subscription_4">Оформити</button></div>
+        <div class="sub-opt"><span class="muted" style="font-weight:700">2 комплексні / міс</span><b class="big tabnum">2 430 грн</b><span class="pill">−10% · економія 270 грн</span><button class="btn btn-secondary btn-sm" type="button" data-book data-book-note="Абонемент: 2 комплексні мийки на місяць" data-book-services="complex" data-track-src="subscription_2">Оформити</button></div>
+        <div class="sub-opt"><span class="muted" style="font-weight:700">4 комплексні / міс</span><b class="big tabnum">4 320 грн</b><span class="pill">−20% · економія 1 080 грн</span><button class="btn btn-dark btn-sm" type="button" data-book data-book-note="Абонемент: 4 комплексні мийки на місяць" data-book-services="complex" data-track-src="subscription_4">Оформити</button></div>
       </div>
     </div>
     <div class="rating-strip">
@@ -903,7 +923,7 @@ details.more .opt-list{margin-top:12px}
     <div style="display:grid;gap:20px">
       <span class="eyebrow">До / Після</span>
       <h2 id="ba-title">Результат, який видно одразу</h2>
-      <p class="lead" id="baCaption">BMW M5 після осінньої траси Львів — Київ. Комплексна мийка й рідкий віск, 1 год 40 хв на парковці ТРЦ Forum.</p>
+      <p class="lead" id="baCaption">BMW M5 після осінньої траси Львів — Київ. Комплексна мийка й рідкий віск, 1 год 40 хв на парковці ТРЦ Forum.</p>
       <div class="ba-cases" role="group" aria-label="Оберіть приклад">
         <button class="chip-btn" type="button" aria-pressed="true" data-case="0">Кузов після траси</button>
         <button class="chip-btn" type="button" aria-pressed="false" data-case="1">Весняний пилок</button>
@@ -925,12 +945,12 @@ details.more .opt-list{margin-top:12px}
       <h2 id="why-title">Спокійно доручайте нам навіть преміум-авто</h2>
     </div>
     <div class="grid-3">
-      <div class="feature reveal"><span class="service-ico"><i data-lucide="leaf"></i></span><div><h3>Екологічні засоби</h3><p>Біорозкладна хімія з сертифікатами ЄС. На одну мийку йде <b class="fig">15 л води</b> замість 150 на звичайній мийці.</p></div></div>
-      <div class="feature reveal"><span class="service-ico"><i data-lucide="plug-zap"></i></span><div><h3>Повна автономність</h3><p>Возимо з собою <b class="fig">200 л очищеної води</b> і тихий генератор. Розетка й кран не потрібні.</p></div></div>
+      <div class="feature reveal"><span class="service-ico"><i data-lucide="leaf"></i></span><div><h3>Екологічні засоби</h3><p>Біорозкладна хімія з сертифікатами ЄС. На одну мийку йде <b class="fig">15 л води</b> замість 150 на звичайній мийці.</p></div></div>
+      <div class="feature reveal"><span class="service-ico"><i data-lucide="plug-zap"></i></span><div><h3>Повна автономність</h3><p>Возимо з собою <b class="fig">200 л очищеної води</b> і тихий генератор. Розетка й кран не потрібні.</p></div></div>
       <div class="feature reveal"><span class="service-ico"><i data-lucide="receipt"></i></span><div><h3>Фіксована ціна</h3><p>Ціну, яку показав калькулятор, ви й заплатите. «Раптових» доплат на місці не буває.</p></div></div>
-      <div class="feature reveal"><span class="service-ico"><i data-lucide="badge-check"></i></span><div><h3>Гарантія якості</h3><p>Щось не сподобалося? Протягом <b class="fig">24 годин</b> безкоштовно перемиємо.</p></div></div>
-      <div class="feature reveal"><span class="service-ico"><i data-lucide="shield-check"></i></span><div><h3>Страхування</h3><p>Наша відповідальність застрахована на <b class="fig">500 000 грн</b>. Ризики беремо на себе.</p></div></div>
-      <div class="feature reveal"><span class="service-ico"><i data-lucide="user-check"></i></span><div><h3>Досвідчені майстри</h3><p>Стаж кожного майстра — від 3 років. Навчання з детейлінгу, окремі мікрофібри для кожної зони авто.</p></div></div>
+      <div class="feature reveal"><span class="service-ico"><i data-lucide="badge-check"></i></span><div><h3>Гарантія якості</h3><p>Щось не сподобалося? Протягом <b class="fig">24 годин</b> безкоштовно перемиємо.</p></div></div>
+      <div class="feature reveal"><span class="service-ico"><i data-lucide="shield-check"></i></span><div><h3>Страхування</h3><p>Наша відповідальність застрахована на <b class="fig">500 000 грн</b>. Ризики беремо на себе.</p></div></div>
+      <div class="feature reveal"><span class="service-ico"><i data-lucide="user-check"></i></span><div><h3>Досвідчені майстри</h3><p>Стаж кожного майстра — від 3 років. Навчання з детейлінгу, окремі мікрофібри для кожної зони авто.</p></div></div>
     </div>
   </div>
 </section>
@@ -976,7 +996,7 @@ details.more .opt-list{margin-top:12px}
       <div class="b2b-stats">
         <div><b class="tabnum">30+</b><span>компаній на обслуговуванні</span></div>
         <div><b class="tabnum">−25%</b><span>знижка від 20 авто</span></div>
-        <div><b class="tabnum">24 год</b><span>на комерційну пропозицію</span></div>
+        <div><b class="tabnum">24 год</b><span>на комерційну пропозицію</span></div>
       </div>
     </div>
     <div class="card" style="padding:28px">
@@ -1030,14 +1050,14 @@ details.more .opt-list{margin-top:12px}
         <g data-zone="Зимна Вода"><circle class="sub-dot" cx="52" cy="226" r="7"/><text x="44" y="206">Зимна Вода</text></g>
       </svg>
       <div class="map-legend">
-        <span><i style="background:var(--map-city);border:2px solid var(--primary-text)"></i>Львів — виїзд безкоштовно</span>
-        <span><i style="background:transparent;border:2px dashed var(--accent-text)"></i>Передмістя — +225 грн</span>
+        <span><i style="background:var(--map-city);border:2px solid var(--primary-text)"></i>Львів — виїзд безкоштовно</span>
+        <span><i style="background:transparent;border:2px dashed var(--accent-text)"></i>Передмістя — +225 грн</span>
       </div>
     </div>
     <div class="zone-check">
       <span class="eyebrow">Зона обслуговування</span>
-      <h2 id="zone-title">Приїдемо в будь-який район Львова</h2>
-      <p class="lead">Виїзд у межах міста безкоштовний. У передмістя, до 10 км від кільцевої, доплата фіксована — 225 грн.</p>
+      <h2 id="zone-title">Приїдемо в будь‑який район Львова</h2>
+      <p class="lead">Виїзд у межах міста безкоштовний. У передмістя, до 10 км від кільцевої, доплата фіксована — 225 грн.</p>
       <div class="field combo">
         <label for="zoneInput">Перевірте свою адресу</label>
         <input class="input" id="zoneInput" type="text" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="zoneList" aria-describedby="zoneHelp" placeholder="Напр.: вул. Стрийська, 45 або Винники">
@@ -1048,9 +1068,9 @@ details.more .opt-list{margin-top:12px}
         <div class="alert info"><i data-lucide="info"></i><p>Підкажемо, чи приїдемо до вас і скільки коштуватиме виїзд.</p></div>
       </div>
       <ul class="zone-prices">
-        <li><span>Львів, усі 6 районів</span><b>0 грн</b></li>
-        <li><span>Передмістя до 10 км</span><b>+225 грн</b></li>
-        <li><span>Далі 10 км / автопарки</span><b>за домовленістю</b></li>
+        <li><span>Львів, усі 6 районів</span><b>0 грн</b></li>
+        <li><span>Передмістя до 10 км</span><b>+225 грн</b></li>
+        <li><span>Далі 10 км / автопарки</span><b>за домовленістю</b></li>
       </ul>
     </div>
   </div>
@@ -1064,12 +1084,12 @@ details.more .opt-list{margin-top:12px}
       <h2 id="faq-title">Відповіді на те, що питають найчастіше</h2>
     </div>
     <div class="faq" id="faqList">
-      <div class="acc-item"><h3><button class="acc-btn" type="button" aria-expanded="true" aria-controls="faq-1" id="faq-1-b">Чи потрібна вам вода чи електрика? <i data-lucide="chevron-down"></i></button></h3><div class="acc-panel" id="faq-1" role="region" aria-labelledby="faq-1-b"><p>Ні. Возимо 200 л очищеної води та тихий генератор. Від вас потрібне лише місце, де стоїть авто.</p></div></div>
+      <div class="acc-item"><h3><button class="acc-btn" type="button" aria-expanded="true" aria-controls="faq-1" id="faq-1-b">Чи потрібна вам вода чи електрика? <i data-lucide="chevron-down"></i></button></h3><div class="acc-panel" id="faq-1" role="region" aria-labelledby="faq-1-b"><p>Ні. Возимо 200 л очищеної води та тихий генератор. Від вас потрібне лише місце, де стоїть авто.</p></div></div>
       <div class="acc-item"><h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="faq-2" id="faq-2-b">Чи можна мити на підземному паркінгу? <i data-lucide="chevron-down"></i></button></h3><div class="acc-panel" id="faq-2" role="region" aria-labelledby="faq-2-b" hidden><p>Так, і це одне з найпопулярніших місць. Під авто кладемо водозбірний килим, тож підлога паркінгу залишається сухою. Якщо ваш ЖК вимагає погодження з управителем, підкажемо, як його отримати.</p></div></div>
-      <div class="acc-item"><h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="faq-3" id="faq-3-b">Скільки триває мийка? <i data-lucide="chevron-down"></i></button></h3><div class="acc-panel" id="faq-3" role="region" aria-labelledby="faq-3-b" hidden><p>Експрес-мийка займає близько 30 хв, комплексна — 1–1,5 год, хімчистка салону — близько 3 год. Точний час для вашого авто покаже калькулятор.</p></div></div>
-      <div class="acc-item"><h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="faq-4" id="faq-4-b">Що буде, якщо піде дощ? <i data-lucide="chevron-down"></i></button></h3><div class="acc-panel" id="faq-4" role="region" aria-labelledby="faq-4-b" hidden><p>Під навісом і на паркінгу працюємо за будь-якої погоди. Якщо авто стоїть на відкритій парковці й прогноз обіцяє дощ, напишемо заздалегідь і безкоштовно перенесемо мийку на зручний для вас час.</p></div></div>
-      <div class="acc-item"><h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="faq-5" id="faq-5-b">Як оплатити? <i data-lucide="chevron-down"></i></button></h3><div class="acc-panel" id="faq-5" role="region" aria-labelledby="faq-5-b" hidden><p>Оплата після роботи, коли ви все перевірили: готівкою, карткою через термінал, переказом на рахунок ФОП. Для юросіб — за рахунком.</p></div></div>
-      <div class="acc-item"><h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="faq-6" id="faq-6-b">Чи не пошкодить мийка фарбу? <i data-lucide="chevron-down"></i></button></h3><div class="acc-panel" id="faq-6" role="region" aria-labelledby="faq-6-b" hidden><p>Ні. Використовуємо pH-нейтральну піну, миємо методом двох відер і беремо окремі мікрофібри для кожної зони. Перед поліруванням перевіряємо товщину лаку товщиноміром. Нашу відповідальність застраховано на 500 000 грн.</p></div></div>
+      <div class="acc-item"><h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="faq-3" id="faq-3-b">Скільки триває мийка? <i data-lucide="chevron-down"></i></button></h3><div class="acc-panel" id="faq-3" role="region" aria-labelledby="faq-3-b" hidden><p>Експрес-мийка займає близько 30 хв, комплексна — 1–1,5 год, хімчистка салону — близько 3 год. Точний час для вашого авто покаже калькулятор.</p></div></div>
+      <div class="acc-item"><h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="faq-4" id="faq-4-b">Що буде, якщо піде дощ? <i data-lucide="chevron-down"></i></button></h3><div class="acc-panel" id="faq-4" role="region" aria-labelledby="faq-4-b" hidden><p>Під навісом і на паркінгу працюємо за будь‑якої погоди. Якщо авто стоїть на відкритій парковці й прогноз обіцяє дощ, напишемо заздалегідь і безкоштовно перенесемо мийку на зручний для вас час.</p></div></div>
+      <div class="acc-item"><h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="faq-5" id="faq-5-b">Як оплатити? <i data-lucide="chevron-down"></i></button></h3><div class="acc-panel" id="faq-5" role="region" aria-labelledby="faq-5-b" hidden><p>Оплата після роботи, коли ви все перевірили: готівкою, карткою через термінал, переказом на рахунок ФОП. Для юросіб — за рахунком.</p></div></div>
+      <div class="acc-item"><h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="faq-6" id="faq-6-b">Чи не пошкодить мийка фарбу? <i data-lucide="chevron-down"></i></button></h3><div class="acc-panel" id="faq-6" role="region" aria-labelledby="faq-6-b" hidden><p>Ні. Використовуємо pH-нейтральну піну, миємо методом двох відер і беремо окремі мікрофібри для кожної зони. Перед поліруванням перевіряємо товщину лаку товщиноміром. Нашу відповідальність застраховано на 500 000 грн.</p></div></div>
       <div class="acc-item"><h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="faq-7" id="faq-7-b">Чи треба бути присутнім під час мийки? <i data-lucide="chevron-down"></i></button></h3><div class="acc-panel" id="faq-7" role="region" aria-labelledby="faq-7-b" hidden><p>Ні. Для мийки кузова доступ у салон не потрібен. Для салону досить залишити ключ консьєржу чи охороні. Фото «до/після» надішлемо в месенджер.</p></div></div>
     </div>
   </div>
@@ -1083,7 +1103,7 @@ details.more .opt-list{margin-top:12px}
         <h2 id="final-title">Поки ви читали, авто могло вже милися</h2>
         <p class="lead" style="margin-top:16px">Запишіться онлайн за 2 хвилини або залиште номер, і ми передзвонимо протягом 10 хвилин (щодня з 08:00 до 21:00).</p>
         <div class="messengers">
-          <a class="msg-btn js-tel" href="tel:+380671234567" data-track="click_call" data-track-src="final"><i data-lucide="phone"></i> <span class="js-phone-text">+380 67 123 45 67</span></a>
+          <a class="msg-btn js-tel" href="tel:+380671234567" data-track="click_call" data-track-src="final"><i data-lucide="phone"></i> <span class="js-phone-text">+380 67 123 45 67</span></a>
           <a class="msg-btn js-tg" href="https://t.me/ccar_lviv" target="_blank" rel="noopener" data-track="click_telegram" data-track-src="final"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21.9 4.3 18.6 20c-.2 1.1-.9 1.4-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1 9.3-8.4c.4-.4-.1-.6-.6-.2L6 13.5l-4.9-1.5c-1.1-.3-1.1-1.1.2-1.6L20.5 3c.9-.3 1.7.2 1.4 1.3Z"/></svg> Telegram</a>
           <a class="msg-btn js-viber" href="viber://chat?number=%2B380671234567" data-track="click_viber" data-track-src="final"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11.4 1c-2 0-6.3.3-8.6 2.4C1.1 5 .5 7.5.4 10.6c-.1 3.1-.2 8.9 5.4 10.5v2.4s0 1 .6 1.2c.8.2 1.2-.5 2-1.3l1.4-1.6c3.8.3 6.8-.4 7.1-.5.8-.3 5.2-.8 5.9-6.6.7-6-.4-9.8-2.4-11.5C19.9 2.8 17.3 1 11.8 1h-.4Zm.2 1.7h.4c4.6 0 6.9 1.4 7.4 1.8 1.6 1.4 2.4 4.6 1.9 9.6-.6 4.8-4.1 5.1-4.8 5.3-.3.1-2.9.7-6.2.5 0 0-2.4 2.9-3.2 3.7-.1.1-.3.2-.4.1-.1 0-.2-.2-.2-.4v-4c-4.7-1.3-4.5-6.3-4.4-8.9 0-2.6.6-4.7 2-6.1 1.9-1.8 5.5-2 7.5-2Zm.4 2.6a.4.4 0 0 0 0 .8c1.4 0 2.7.5 3.8 1.5 1 1 1.6 2.4 1.6 4.3a.4.4 0 1 0 .8 0c0-2.1-.7-3.8-1.9-4.9A6.1 6.1 0 0 0 12 5.3Zm-3.9 1a1 1 0 0 0-.7.3c-.7.6-1.3 1.3-1.2 2.2 0 .1.1.9 1.3 3 1.2 2 2.5 3.1 3.6 3.8 1.3.8 2.9 1.4 3.6 1.5.6.1 1.3-.4 1.9-1l.1-.2c.4-.5.4-1-.1-1.4l-1.5-1c-.5-.4-1-.2-1.3.1l-.4.5c-.2.3-.6.3-.6.3-2.8-.7-3.6-3.6-3.6-3.6s0-.4.3-.6l.5-.4c.3-.3.5-.8.2-1.3l-1-1.5a1.1 1.1 0 0 0-.9-.4Zm4.3.6a.4.4 0 0 0 0 .8c1.8.1 2.8 1.2 2.9 3a.4.4 0 1 0 .8 0c-.1-2.2-1.4-3.6-3.7-3.8Zm.3 1.6a.4.4 0 0 0 0 .8c.8 0 1.2.5 1.2 1.3a.4.4 0 1 0 .8 0c0-1.2-.8-2-2-2.1Z"/></svg> Viber</a>
         </div>
@@ -1123,18 +1143,18 @@ details.more .opt-list{margin-top:12px}
       <div>
         <h4>Контакти</h4>
         <ul>
-          <li><a class="js-tel" href="tel:+380671234567" data-track="click_call" data-track-src="footer"><span class="js-phone-text">+380 67 123 45 67</span></a></li>
+          <li><a class="js-tel" href="tel:+380671234567" data-track="click_call" data-track-src="footer"><span class="js-phone-text">+380 67 123 45 67</span></a></li>
           <li><a href="mailto:hello@ccar.lviv.ua">hello@ccar.lviv.ua</a></li>
           <li><a class="js-tg" href="https://t.me/ccar_lviv" target="_blank" rel="noopener">Telegram: @ccar_lviv</a></li>
-          <li>Львів і передмістя до 10 км</li>
+          <li>Львів і передмістя до 10 км</li>
         </ul>
       </div>
       <div>
         <h4>Графік роботи</h4>
         <ul>
           <li>Щодня: 08:00–21:00</li>
-          <li>Останній запис — о 20:00</li>
-          <li>Автопарки — цілодобово за домовленістю</li>
+          <li>Останній запис — о 20:00</li>
+          <li>Автопарки — цілодобово за домовленістю</li>
         </ul>
       </div>
       <div>
@@ -1242,7 +1262,7 @@ details.more .opt-list{margin-top:12px}
     </section>
   </div>
   <div class="m-foot" id="bkFoot">
-    <div class="m-total"><small id="bkTotalLbl">Разом · ≈ 1 год 15 хв</small><b id="bkTotal">1 350 грн</b></div>
+    <div class="m-total"><small id="bkTotalLbl">Разом · ≈ 1 год 15 хв</small><b id="bkTotal">1 350 грн</b></div>
     <button class="btn btn-secondary" type="button" id="bkBack">Назад</button>
     <button class="btn btn-primary" type="button" id="bkNext">Далі <i data-lucide="arrow-right"></i></button>
   </div>
@@ -1255,7 +1275,7 @@ details.more .opt-list{margin-top:12px}
 "use strict";
 
 /* =========================================================
-   КОНФІГ — замініть реальними даними
+   КОНФІГ — замініть реальними даними
    ========================================================= */
 const CONFIG = {
   phone: "+380671234567",
@@ -1280,7 +1300,7 @@ const SERVICES = [
     desc: "Коли авто треба привести до ладу сьогодні: змиємо пил і дорожній бруд.",
     inc: ["Безконтактна активна піна", "Ручна мийка кузова й дисків", "Сушіння мікрофіброю"] },
   { id: "complex",  icon: "sparkles",     name: "Комплексна мийка",     price: 1350, dur: 75,  excl: "express",
-    desc: "Кузов зовні й салон усередині — авто як щойно з автосалону.",
+    desc: "Кузов зовні й салон усередині — авто як щойно з автосалону.",
     inc: ["Двофазна мийка кузова", "Пилосос салону й багажника", "Вологе прибирання пластику", "Скло зсередини та ззовні"] },
   { id: "interior", icon: "armchair",     name: "Хімчистка салону",     price: 3600, dur: 180,
     desc: "Прибираємо плями, запахи й бруд із тканини, шкіри та стелі.",
@@ -1312,24 +1332,24 @@ const PACKAGES = [
     inc: ["Експрес-мийка кузова", "Глибоке очищення дисків", "Чорніння шин"] },
   { id: "standard", name: "Стандарт", price: 1935, old: 2250, dur: 110, hot: true, services: ["complex"], addons: ["wheels", "wax"],
     tagline: "Чисто всередині й зовні, плюс захист на 3–4 тижні",
-    inc: ["Комплексна мийка кузова й салону", "Глибоке очищення дисків", "Рідкий віск — вода скочується", "Фото «до/після» в месенджер"] },
+    inc: ["Комплексна мийка кузова й салону", "Глибоке очищення дисків", "Рідкий віск — вода скочується", "Фото «до/після» в месенджер"] },
   { id: "premium", name: "Преміум", price: 4935, old: 5625, dur: 270, services: ["complex", "interior"], addons: ["ozone"],
     tagline: "Коли авто треба «як нове»: перед продажем чи після зими",
-    inc: ["Комплексна мийка", "Хімчистка всього салону", "Озонування — без запахів", "Пріоритетний виїзд за 60 хв"] }
+    inc: ["Комплексна мийка", "Хімчистка всього салону", "Озонування — без запахів", "Пріоритетний виїзд за 60 хв"] }
 ];
 
 const REVIEWS = [
-  { name: "Олена К.", car: "Toyota RAV4", color: "#0B3D91", text: "Записала мийку на парковку біля офісу на Стрийській. Поки була на нараді — авто вже блищало. Фото «до/після» скинули в Telegram, дуже зручно." },
+  { name: "Олена К.", car: "Toyota RAV4", color: "#0B3D91", text: "Записала мийку на парковку біля офісу на Стрийській. Поки була на нараді — авто вже блищало. Фото «до/після» скинули в Telegram, дуже зручно." },
   { name: "Андрій М.", car: "BMW X5", color: "#007883", text: "Робив кераміку на підземному паркінгу ЖК. Хлопці привезли все своє, навіть світло. Минуло два місяці, а вода досі скочується краплями." },
   { name: "Ірина Т.", car: "Škoda Octavia", color: "#7C3AED", text: "Хімчистка після двох дітей і собаки. Запаху немає, плями від соку зникли. Заплатила рівно стільки, скільки показав калькулятор." },
-  { name: "Тарас Л.", car: "Tesla Model 3", color: "#B45309", text: "Дуже делікатно з кузовом: окремі рукавиці для низу й верху, pH-нейтральна хімія. Для мене це важливо — довіряю тільки їм." },
+  { name: "Тарас Л.", car: "Tesla Model 3", color: "#B45309", text: "Дуже делікатно з кузовом: окремі рукавиці для низу й верху, pH-нейтральна хімія. Для мене це важливо — довіряю тільки їм." },
   { name: "Марта С.", car: "Kia Sportage", color: "#BE185D", text: "Взяла абонемент на дві мийки на місяць і вже забула, що таке черги. Приїжджають самі щовівторка зранку, я навіть не виходжу з дому." },
   { name: "Олег В.", car: "Автопарк · 14 × Renault Duster", color: "#15803D", text: "Щотижня обслуговують наш парк, усе закриваємо по договору. Одного разу мийку перенесли через зливу, але попередили заздалегідь." }
 ];
 
 const BA_CASES = [
-  "BMW M5 після осінньої траси Львів — Київ. Комплексна мийка й рідкий віск, 1 год 40 хв на парковці ТРЦ Forum.",
-  "BMW M5 у травневому пилку після тижня під каштанами на Личаківській. Експрес-мийка — 30 хв, у дворі клієнтки.",
+  "BMW M5 після осінньої траси Львів — Київ. Комплексна мийка й рідкий віск, 1 год 40 хв на парковці ТРЦ Forum.",
+  "BMW M5 у травневому пилку після тижня під каштанами на Личаківській. Експрес-мийка — 30 хв, у дворі клієнтки.",
   "BMW M5 після лютневих реагентів. Комплексна мийка й очищення дисків на підземному паркінгу ЖК на Сихові."
 ];
 // Номер фото img/ba-N-*.jpg для кожної кнопки: траса → бруд збоку, пилок → під деревами, реагенти → підземний паркінг
@@ -1361,13 +1381,13 @@ const CONTACT_WAYS = [
   { id: "sms", name: "SMS", icon: "message-square" }
 ];
 
-/* i18n: українська — з розмітки, інші мови — словник. Додайте ключі для повного перекладу. */
+/* i18n: українська — з розмітки, інші мови — словник. Додайте ключі для повного перекладу. */
 const I18N = {
   en: {
     "nav.services": "Services", "nav.prices": "Prices", "nav.how": "How it works", "nav.reviews": "Reviews", "nav.b2b": "For business", "nav.contacts": "Contacts",
     "cta.book": "Book now", "hero.kicker": "Free slots today · Lviv & suburbs",
-    "hero.title": "A clean car wherever you are — <em>no queues, no trips</em>",
-    "hero.sub": "We come to your home, office or mall parking and wash your car with our own water and power. You carry on with your day — and pay only after the job is done.",
+    "hero.title": "A clean car wherever you are — <em>no queues, no trips</em>",
+    "hero.sub": "We come to your home, office or mall parking and wash your car with our own water and power. You carry on with your day — and pay only after the job is done.",
     "hero.cta1": "Book online", "hero.cta2": "Estimate price",
     "trust.1": "Arrive within 60 min", "trust.2": "500+ happy clients", "trust.3": "4.9 rating on Google", "mbar.call": "Call"
   }
@@ -1385,7 +1405,7 @@ const store = {
   del(k) { try { localStorage.removeItem(k); } catch {} }
 };
 const fmt = n => Math.round(n).toLocaleString("uk-UA").replace(/ | /g, " ");
-const round10 = n => Math.round(n / 10) * 10;
+const roundPrice = n => Math.round(n / 5) * 5; // до 5 грн, щоб базові ціни (675, 1 035…) не змінювались
 const fmtDur = min => { min = Math.round(min / 5) * 5; const h = Math.floor(min / 60), m = min % 60; return h ? `${h} год${m ? ` ${m} хв` : ""}` : `${m} хв`; };
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const icon = name => `<i data-lucide="${name}"></i>`;
@@ -1393,7 +1413,7 @@ const refreshIcons = () => { if (window.lucide) window.lucide.createIcons({ attr
 const byId = (arr, id) => arr.find(x => x.id === id);
 
 /* =========================================================
-   АНАЛІТИКА (GA4 + Meta Pixel) — вмикається після згоди
+   АНАЛІТИКА (GA4 + Meta Pixel) — вмикається після згоди
    ========================================================= */
 window.dataLayer = window.dataLayer || [];
 let analyticsOn = false;
@@ -1428,9 +1448,9 @@ document.addEventListener("click", e => {
 });
 
 /* =========================================================
-   ВІДПРАВКА ЗАЯВОК — ТОЧКА ІНТЕГРАЦІЇ
+   ВІДПРАВКА ЗАЯВОК — ТОЧКА ІНТЕГРАЦІЇ
    ========================================================= */
-/* Supabase: заявки й зайнятий час. Налаштування — у supabase-config.js, схема — supabase/schema.sql */
+/* Supabase: заявки й зайнятий час. Налаштування — у supabase-config.js, схема — supabase/schema.sql */
 const SB = window.CCAR_SUPABASE || {};
 const sbOn = () => Boolean(SB.url && SB.anonKey);
 async function sbRpc(fn, args) {
@@ -1548,12 +1568,12 @@ function quote(sel) {
   let price = 0, dur = 0, old = 0; const lines = [];
   if (sel.pkg) {
     const p = byId(PACKAGES, sel.pkg);
-    const pp = round10(p.price * c.mult);
-    price += pp; old += round10(p.old * c.mult); dur += p.dur * c.dur;
+    const pp = roundPrice(p.price * c.mult);
+    price += pp; old += roundPrice(p.old * c.mult); dur += p.dur * c.dur;
     lines.push([`Пакет «${p.name}»`, pp]);
   }
   sel.services.forEach(id => {
-    const s = byId(SERVICES, id); const sp = round10(s.price * c.mult);
+    const s = byId(SERVICES, id); const sp = roundPrice(s.price * c.mult);
     price += sp; old += sp; dur += s.dur * c.dur; lines.push([s.name, sp]);
   });
   sel.addons.forEach(id => {
@@ -1580,7 +1600,7 @@ $("#servicesGrid").innerHTML = SERVICES.map(s => `
     ${s.cover ? `<p class="note">${icon("umbrella")}<span>Потрібне сухе місце під дахом: паркінг, гараж або навіс</span></p>` : ""}
     <div class="service-foot">
       <span class="meta">${icon("clock")} ${fmtDur(s.dur)}</span>
-      <span class="price-from"><small>від</small> ${fmt(s.price)} грн</span>
+      <span class="price-from"><small>від</small> ${fmt(s.price)} грн</span>
       <button class="btn btn-secondary btn-sm btn-block" type="button" data-book data-book-services="${s.id}" data-track-src="service_${s.id}">Записатися</button>
     </div>
   </article>`).join("");
@@ -1590,7 +1610,7 @@ $("#plansGrid").innerHTML = PACKAGES.map(p => `
   <article class="card plan reveal ${p.hot ? "plan--hot" : ""}">
     ${p.hot ? `<span class="plan-flag">Найпопулярніший</span>` : ""}
     <div><h3>${p.name}</h3><p class="muted" style="margin-top:6px">${p.tagline}</p></div>
-    <div class="plan-price"><span class="muted" style="font-weight:700">від</span><b class="tabnum">${fmt(p.price)}</b><span style="font-weight:700">грн</span><s>${fmt(p.old)} грн</s></div>
+    <div class="plan-price"><span class="muted" style="font-weight:700">від</span><b class="tabnum">${fmt(p.price)}</b><span style="font-weight:700">грн</span><s>${fmt(p.old)} грн</s></div>
     <span class="meta" style="${p.hot ? "color:#C9D9F6" : ""}">${icon("clock")} ≈ ${fmtDur(p.dur)}</span>
     <ul class="checklist">${p.inc.map(i => `<li>${icon("check")}<span>${i}</span></li>`).join("")}</ul>
     <button class="btn ${p.hot ? "btn-primary" : "btn-secondary"} btn-lg btn-block" type="button" data-book data-book-pkg="${p.id}" data-track-src="plan_${p.id}">Обрати «${p.name}»</button>
@@ -1603,7 +1623,7 @@ const calc = { cls: "sedan", pkg: null, services: ["complex"], addons: [] };
 $("#calcClasses").innerHTML = classOpts("calc-cls", calc.cls);
 function renderCalcOptions() {
   const c = byId(CLASSES, calc.cls);
-  $("#calcServices").innerHTML = SERVICES.map(s => optHTML({ type: "checkbox", name: "calc-svc", value: s.id, checked: calc.services.includes(s.id), title: s.name, sub: fmtDur(s.dur * c.dur), price: fmt(round10(s.price * c.mult)) + " грн", ico: s.icon })).join("");
+  $("#calcServices").innerHTML = SERVICES.map(s => optHTML({ type: "checkbox", name: "calc-svc", value: s.id, checked: calc.services.includes(s.id), title: s.name, sub: fmtDur(s.dur * c.dur), price: fmt(roundPrice(s.price * c.mult)) + " грн", ico: s.icon })).join("");
   $("#calcAddons").innerHTML = ADDONS.map(a => optHTML({ type: "checkbox", name: "calc-add", value: a.id, checked: calc.addons.includes(a.id), title: a.name, sub: "+" + fmtDur(a.dur), price: "+" + fmt(a.price) + " грн" })).join("");
   refreshIcons();
 }
@@ -1619,8 +1639,8 @@ function renderCalcSummary() {
   animateNumber($("#calcTotal"), shownTotal, q.price); shownTotal = q.price;
   $("#calcDur").textContent = q.dur ? `≈ ${fmtDur(q.dur)} на місці` : "—";
   $("#calcLines").innerHTML = q.lines.length
-    ? `<li><span>${q.cls.name}</span><span>${q.cls.mult > 1 ? "×" + String(q.cls.mult).replace(".", ",") : "базова"}</span></li>` + q.lines.map(([n, p]) => `<li><span>${esc(n)}</span><span>${fmt(p)} грн</span></li>`).join("")
-    : `<li class="calc-empty">Оберіть хоча б одну послугу — ціна з’явиться тут.</li>`;
+    ? `<li><span>${q.cls.name}</span><span>${q.cls.mult > 1 ? "×" + String(q.cls.mult).replace(".", ",") : "базова"}</span></li>` + q.lines.map(([n, p]) => `<li><span>${esc(n)}</span><span>${fmt(p)} грн</span></li>`).join("")
+    : `<li class="calc-empty">Оберіть хоча б одну послугу — ціна з’явиться тут.</li>`;
   $("#calcBook").disabled = !q.lines.length;
 }
 $("#calcForm").addEventListener("change", e => {
@@ -1657,7 +1677,7 @@ $$("[data-case]").forEach(b => b.addEventListener("click", () => {
 }));
 
 /* =========================================================
-   ВІДГУКИ — карусель
+   ВІДГУКИ — карусель
    ========================================================= */
 const track_ = $("#revTrack");
 track_.innerHTML = REVIEWS.map((r, i) => `
@@ -1682,7 +1702,7 @@ track_.addEventListener("keydown", e => { if (e.key === "ArrowRight") { e.preven
 syncDots();
 
 /* =========================================================
-   FAQ — акордеон
+   FAQ — акордеон
    ========================================================= */
 $$(".acc-btn").forEach(btn => btn.addEventListener("click", () => {
   const open = btn.getAttribute("aria-expanded") === "true";
@@ -1719,7 +1739,7 @@ function autocomplete(input, list, onPick) {
     items = PLACES.filter(p => norm(p.name).includes(q)).slice(0, 6);
     list.innerHTML = items.length
       ? items.map((p, i) => `<li role="option" id="${list.id}-o${i}" aria-selected="false">${icon(p.type === "city" ? "map-pin" : "navigation")}<span>${esc(p.name)}</span><small>${p.type === "suburb" ? "передмістя" : p.type === "outside" ? "поза зоною" : esc(p.district) + " р-н"}</small></li>`).join("")
-      : `<li class="empty" role="option" aria-disabled="true">Не знайшли в підказках — просто допишіть адресу повністю</li>`;
+      : `<li class="empty" role="option" aria-disabled="true">Не знайшли в підказках — просто допишіть адресу повністю</li>`;
     list.hidden = false; input.setAttribute("aria-expanded", "true"); active = -1; refreshIcons();
     onPick(null, input.value);
   });
@@ -1735,8 +1755,8 @@ function autocomplete(input, list, onPick) {
 }
 function zoneAlert(z) {
   if (!z) return "";
-  if (z.type === "city") return `<div class="alert ok">${icon("circle-check")}<p><b>Приїдемо!</b> ${esc(z.district)} район — виїзд безкоштовний. Найближче вільне вікно — сьогодні.</p></div>`;
-  if (z.type === "suburb") return `<div class="alert info">${icon("navigation")}<p><b>Приїдемо в ${esc(z.district)}.</b> Передмістя — фіксована доплата за виїзд ${CONFIG.suburbFee} грн.</p></div>`;
+  if (z.type === "city") return `<div class="alert ok">${icon("circle-check")}<p><b>Приїдемо!</b> ${esc(z.district)} район — виїзд безкоштовний. Найближче вільне вікно — сьогодні.</p></div>`;
+  if (z.type === "suburb") return `<div class="alert info">${icon("navigation")}<p><b>Приїдемо в ${esc(z.district)}.</b> Передмістя — фіксована доплата за виїзд ${CONFIG.suburbFee} грн.</p></div>`;
   if (z.type === "outside") return `<div class="alert warn">${icon("triangle-alert")}<p><b>Це поза регулярною зоною.</b> Виїзд можливий за домовленістю, наприклад для кількох авто. <a href="${CONFIG.telegram}" target="_blank" rel="noopener">Напишіть у Telegram</a>, і ми порахуємо ціну.</p></div>`;
   return `<div class="alert info">${icon("info")}<p><b>Не знайшли цю адресу в довіднику.</b> Найімовірніше, приїдемо. Менеджер уточнить під час підтвердження.</p></div>`;
 }
@@ -1780,7 +1800,7 @@ const RULES = {
   phone: v => /^[1-9]\d{8}$/.test(phoneDigits(v))
 };
 const MSGS = {
-  name: "Як до вас звертатися? Вкажіть ім’я — хоча б 2 літери.",
+  name: "Як до вас звертатися? Вкажіть ім’я — хоча б 2 літери.",
   phone: "Номер виглядає неповним: потрібно 9 цифр після +380.",
   required: "Заповніть це поле."
 };
@@ -1841,9 +1861,9 @@ const wQuote = () => quote({ ...W, fee: wFee() });
 function renderStep1() {
   $("#bkClasses").innerHTML = classOpts("bk-cls", W.cls);
   const c = byId(CLASSES, W.cls);
-  $("#bkPackages").innerHTML = PACKAGES.map(p => optHTML({ type: "checkbox", name: "bk-pkg", value: p.id, checked: W.pkg === p.id, title: `Пакет «${p.name}»`, sub: p.inc.slice(0, 3).join(" · "), price: fmt(round10(p.price * c.mult)) + " грн", ico: "package", badge: p.hot ? "Найпопулярніший" : "" })).join("")
+  $("#bkPackages").innerHTML = PACKAGES.map(p => optHTML({ type: "checkbox", name: "bk-pkg", value: p.id, checked: W.pkg === p.id, title: `Пакет «${p.name}»`, sub: p.inc.slice(0, 3).join(" · "), price: fmt(roundPrice(p.price * c.mult)) + " грн", ico: "package", badge: p.hot ? "Найпопулярніший" : "" })).join("")
     + `<p class="help" style="text-align:center;margin:6px 0 2px">або окремі послуги</p>`;
-  $("#bkServices").innerHTML = SERVICES.map(s => optHTML({ type: "checkbox", name: "bk-svc", value: s.id, checked: W.services.includes(s.id), title: s.name, sub: fmtDur(s.dur * c.dur), price: fmt(round10(s.price * c.mult)) + " грн", ico: s.icon })).join("");
+  $("#bkServices").innerHTML = SERVICES.map(s => optHTML({ type: "checkbox", name: "bk-svc", value: s.id, checked: W.services.includes(s.id), title: s.name, sub: fmtDur(s.dur * c.dur), price: fmt(roundPrice(s.price * c.mult)) + " грн", ico: s.icon })).join("");
   $("#bkAddons").innerHTML = ADDONS.map(a => optHTML({ type: "checkbox", name: "bk-add", value: a.id, checked: W.addons.includes(a.id), title: a.name, sub: "+" + fmtDur(a.dur), price: "+" + fmt(a.price) + " грн" })).join("");
   if (W.addons.length) $("#bkAddonsWrap").open = true;
 }
@@ -1860,8 +1880,8 @@ const isoDate = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, 
 const parseDate = s => { const [y, m, d] = s.split("-").map(Number); return new Date(y, m - 1, d); };
 const humanDate = s => { const d = parseDate(s); return `${DAY[d.getDay()]}, ${d.getDate()} ${MON_FULL[d.getMonth()]}`; };
 function days() { const out = [], t = new Date(); t.setHours(0, 0, 0, 0); for (let i = 0; i < 14; i++) { const d = new Date(t); d.setDate(t.getDate() + i); out.push(d); } return out; }
-/* Зайнятість: з Supabase (busy_slots), якщо підключено; інакше — детермінована демо-імітація.
-   ranges — зайняті проміжки [start_min, end_min) у хвилинах від 00:00; слот зайнятий, якщо мийка тривалістю dur з ним перетинається. */
+/* Зайнятість: з Supabase (busy_slots), якщо підключено; інакше — детермінована демо-імітація.
+   ranges — зайняті проміжки [start_min, end_min) у хвилинах від 00:00; слот зайнятий, якщо мийка тривалістю dur з ним перетинається. */
 function slotsFor(dateStr, ranges, dur) {
   const d = parseDate(dateStr), now = new Date(), out = [];
   for (let h = 8; h <= 20; h++) {
@@ -1880,7 +1900,7 @@ function slotsFor(dateStr, ranges, dur) {
 async function busyRanges(dateStr) {
   if (!sbOn()) return null;
   try { return await sbRpc("busy_slots", { d: dateStr }); }
-  catch { return null; } // база недоступна — показуємо сітку, а конфлікт відловить create_lead
+  catch { return null; } // база недоступна — показуємо сітку, а конфлікт відловить create_lead
 }
 function renderDates() {
   if (!W.date || parseDate(W.date) < new Date(new Date().toDateString())) W.date = isoDate(days()[0]);
@@ -1931,11 +1951,11 @@ function summaryHTML(editable) {
     + row("Адреса", `${esc(W.address)}<br><span class="muted" style="font-weight:600">${byId(PLACE_TYPES, W.place).name}${W.placeNote ? " · " + esc(W.placeNote) : ""}</span>`, 2)
     + row("Дата і час", `${humanDate(W.date)}, ${W.time}<br><span class="muted" style="font-weight:600">≈ ${fmtDur(q.dur)} на місці</span>`, 3)
     + row("Контакти", `${esc(W.name)}, ${esc(W.phone)}<br><span class="muted" style="font-weight:600">Підтвердження: ${byId(CONTACT_WAYS, W.contact).name}</span>`, 4)
-    + `<div class="summary-row summary-total"><dt>До сплати після роботи</dt><dd class="tabnum">${fmt(q.price)} грн${wFee() ? ` <span class="muted" style="font-size:14px;font-weight:600">(з них виїзд ${CONFIG.suburbFee} грн)</span>` : ""}</dd></div>`;
+    + `<div class="summary-row summary-total"><dt>До сплати після роботи</dt><dd class="tabnum">${fmt(q.price)} грн${wFee() ? ` <span class="muted" style="font-size:14px;font-weight:600">(з них виїзд ${CONFIG.suburbFee} грн)</span>` : ""}</dd></div>`;
 }
 function updateFoot() {
   const q = wQuote();
-  $("#bkTotal").textContent = q.lines.length ? `${fmt(q.price)} грн` : "—";
+  $("#bkTotal").textContent = q.lines.length ? `${fmt(q.price)} грн` : "—";
   $("#bkTotalLbl").textContent = q.lines.length ? `Разом · ≈ ${fmtDur(q.dur)}` : "Оберіть послугу";
 }
 function showStep(n, focus = true) {
@@ -1996,10 +2016,10 @@ async function submitBooking() {
   } catch (err) {
     if (err.message === "slot_taken") {
       W.time = null; showStep(3);
-      setErr("#bk-slot-err", `Цей час щойно зайняли — оберіть інший, будь ласка.`);
+      setErr("#bk-slot-err", `Цей час щойно зайняли — оберіть інший, будь ласка.`);
       return;
     }
-    $("#bkError").innerHTML = `<div class="alert error">${icon("wifi-off")}<p><b>${err.status ? "Запис не надіслано — помилка сервера." : "Запис не надіслано — схоже, зник інтернет."}</b> Дані збережено: натисніть «Підтвердити запис» ще раз або напишіть нам у <a href="${CONFIG.telegram}" target="_blank" rel="noopener">Telegram</a>.</p></div>`;
+    $("#bkError").innerHTML = `<div class="alert error">${icon("wifi-off")}<p><b>${err.status ? "Запис не надіслано — помилка сервера." : "Запис не надіслано — схоже, зник інтернет."}</b> Дані збережено: натисніть «Підтвердити запис» ще раз або напишіть нам у <a href="${CONFIG.telegram}" target="_blank" rel="noopener">Telegram</a>.</p></div>`;
     next.innerHTML = `Спробувати ще раз ${icon("rotate-cw")}`;
     refreshIcons();
   } finally { next.disabled = back.disabled = false; }
@@ -2012,7 +2032,7 @@ function setupCalendar(id) {
   const end = new Date(start.getTime() + q.dur * 60000);
   const f = d => `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, "0")}${String(d.getDate()).padStart(2, "0")}T${String(d.getHours()).padStart(2, "0")}${String(d.getMinutes()).padStart(2, "0")}00`;
   const title = "Мийка авто CCar";
-  const details = `Запис ${id}. ${q.lines.map(l => l[0]).join(", ")}. Разом ${fmt(q.price)} грн, оплата після роботи. Тел.: ${CONFIG.phoneDisplay}`;
+  const details = `Запис ${id}. ${q.lines.map(l => l[0]).join(", ")}. Разом ${fmt(q.price)} грн, оплата після роботи. Тел.: ${CONFIG.phoneDisplay}`;
   const loc = `${b.address}, Львів`;
   $("#bkGcal").href = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${f(start)}/${f(end)}&ctz=Europe/Kyiv&details=${encodeURIComponent(details)}&location=${encodeURIComponent(loc)}`;
   const escIcs = s => s.replace(/[,;\\]/g, m => "\\" + m);
