@@ -1499,6 +1499,13 @@ function setMenu(open) {
 burger.addEventListener("click", () => setMenu(!mm.classList.contains("open")));
 mm.addEventListener("click", e => { if (e.target.closest("a,button")) setMenu(false); });
 document.addEventListener("keydown", e => { if (e.key === "Escape" && mm.classList.contains("open")) { setMenu(false); burger.focus(); } });
+// Логотип → на початок сторінки. Шапка sticky, тому звичайний перехід на #top не прокручує
+$$('a.logo[href="#top"]').forEach(a => a.addEventListener("click", e => {
+  e.preventDefault();
+  if (mm.classList.contains("open")) setMenu(false);
+  scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+  history.replaceState(null, "", location.pathname + location.search);
+}));
 
 const navLinks = $$(".nav a");
 const sectionIds = ["services", "calculator", "pricing", "how", "reviews", "business", "zone", "faq", "contacts"];
