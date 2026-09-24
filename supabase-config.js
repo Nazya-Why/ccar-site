@@ -3,6 +3,6 @@
 // НІКОЛИ не вставляйте сюди service_role / secret ключ.
 // Поки поля порожні, сайт працює в демо-режимі й заявки нікуди не зберігаються.
 window.CCAR_SUPABASE = {
-  url: "",      // напр. "https://abcdefghijkl.supabase.co"
-  anonKey: ""   // напр. "sb_publishable_..." або довгий "eyJ..."
+  url: "https://maftjscrwbgduivbxcrq.supabase.co",
+  anonKey: "sb_publishable_iHLekQBocyI9oUNEjtTOiQ_Ny6qO_2v"
 };
